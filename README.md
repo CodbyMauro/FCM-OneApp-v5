@@ -35,15 +35,15 @@ To add the notification icon to your app, follow these steps:
 The strucuture should look like this:
 
   res/
-│
-├── drawable-mdpi/
-│   └── notification_icon.png
-├── drawable-hdpi/
-│   └── notification_icon.png
-├── drawable-xhdpi/
-│   └── notification_icon.png
-├── drawable-xxhdpi/
-│   └── notification_icon.png
-└── drawable-xxxhdpi/
-    └── notification_icon.png
+	│
+	├── drawable-mdpi/
+	│   └── notification_icon.png
+	├── drawable-hdpi/
+	│   └── notification_icon.png
+	├── drawable-xhdpi/
+	│   └── notification_icon.png
+	├── drawable-xxhdpi/
+	│   └── notification_icon.png
+	└── drawable-xxxhdpi/
+		└── notification_icon.png
 
