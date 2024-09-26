@@ -18,6 +18,7 @@ cordova-plugin-change-notification-icon
   cordova plugin add path/to/cordova-plugin-change-notification-icon --variable NOTIFICATION_COLOR="#4CAF50"
 
   2. or if the plugin is hosted on a repository (such as GitHub):
+  
 cordova plugin add https://github.com/your-repo/cordova-plugin-change-notification-icon --variable NOTIFICATION_COLOR="#4CAF50"
 
 

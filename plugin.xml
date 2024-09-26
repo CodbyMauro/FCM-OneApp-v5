@@ -8,16 +8,26 @@
     <license>MIT</license>
     <keywords>cordova, android, firebase, notification, icon, color</keywords>
     
-   <platform name="android">
+   <!-- Define the variable NOTIFICATION_COLOR -->
+    <preference name="NOTIFICATION_COLOR" value="#ffffff" />
+    <!-- Define the name of the icon that you passed in the drawable folders ex: notification_icon -->
+    <preference name="NOTIFICATION_ICON" value ="notification_icon"/>
+
+    <platform name="android">
         <!-- Add meta-data to AndroidManifest.xml -->
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@drawable/notification_icon" />
+                android:resource="@drawable/$NOTIFICATION_ICON" />
                 
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_color"
                 android:resource="@color/notification_color" />
+        </config-file>
+
+        <!-- Add notification_color to strings.xml -->
+        <config-file target="res/values/strings.xml" parent="resources">
+            <string name="notification_color">$NOTIFICATION_COLOR</string>
         </config-file>
     </platform>
 
