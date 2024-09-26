@@ -1,0 +1,19 @@
+{
+  "name": "ChangeNotificationIcon",
+  "version": "1.0.0",
+  "description": "Cordova plugin to change Firebase notification icon and color for Android",
+  "cordova": {
+    "id": "com.outsystems.experts.changenotificationicon",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "xml2js": "^0.6.2"
+  }
+}

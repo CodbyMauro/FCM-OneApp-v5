@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.outsystems.experts.changenotificationicon" version="1.0.0"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Change Notification Icon</name>
+    <description>Cordova plugin to change Firebase notification icon and color for Android</description>
+    <license>MIT</license>
+    <keywords>cordova, android, firebase, notification, icon, color</keywords>
+    
+   <platform name="android">
+        <!-- Add meta-data to AndroidManifest.xml -->
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_icon"
+                android:resource="@drawable/notification_icon" />
+                
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_color"
+                android:resource="@color/notification_color" />
+        </config-file>
+    </platform>
+
+</plugin>
