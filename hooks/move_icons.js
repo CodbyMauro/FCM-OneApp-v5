@@ -21,7 +21,7 @@ module.exports = function (context) {
     }
 
     // Unzip the file and move drawable folders to Android platform directory
-    console.log('--- 📦 -- Unzipping NotificationIcons.zip and moving drawable folders...');
+    console.log('--- 📦 -- Unzipping NotificationIcons.zip and processing drawable folders...');
 
     fs.createReadStream(zipFilePath)
         .pipe(unzipper.Extract({ path: projectRoot }))
@@ -29,47 +29,61 @@ module.exports = function (context) {
             const drawableSourcePath = path.join(projectRoot, 'NotificationIcons');
 
             console.log('--- 📂 -- Listing contents of NotificationIcons folder:');
-            
+
             fs.readdir(drawableSourcePath, (err, files) => {
                 if (err) {
                     console.error('----- ❌ --- Error reading unzipped directory:', err);
-                } else {
-                    files.forEach(file => {
-                        console.log(`----- 📄 --- ${file}`);
-                    });
+                    deferral.reject(err);
+                    return;
                 }
-            });
-            
-            // List of drawable folders to move
-            const drawableFolders = [
-                'drawable-hdpi',
-                'drawable-mdpi',
-                'drawable-xhdpi',
-                'drawable-xxhdpi',
-                //'drawable-xxxhdpi'
-            ];
 
-            // Move each drawable folder to the Android res folder
-            drawableFolders.forEach(folder => {
-                const source = path.join(drawableSourcePath, folder);
-                const destination = path.join(platformRoot, folder);
+                files.forEach(folder => {
+                    const sourceFolder = path.join(drawableSourcePath, folder);
+                    console.log(`----- ✅ --- sourceFolder >>>>> ${sourceFolder} -- folder ${folder}`);
+                    
+                    // Only process drawable folders
+                    if (fs.lstatSync(sourceFolder).isDirectory() && folder.startsWith('drawable')) {
+                        const destinationFolder = path.join(platformRoot, folder);
+                        console.log(`----- ✅ --- destinationFolder >>>>> ${destinationFolder}`);
 
-                // Remove the destination folder if it already exists
-                // rimraf.sync(destination);
 
-                // Move the folder
-                fs.renameSync(source, destination);
-                console.log(`-----  ✅ --- Moved ${folder} to ${destination}`);
+                        // Ensure the destination drawable folder exists, if not, create it
+                        if (!fs.existsSync(destinationFolder)) {
+                            fs.mkdirSync(destinationFolder);
+                            console.log(`----- 📁 --- Created ${destinationFolder}`);
+                        }
+
+                        // Read the content of the drawable folder
+                        fs.readdir(sourceFolder, (err, drawableFiles) => {
+                            if (err) {
+                                console.error(`----- ❌ --- Error reading folder ${sourceFolder}:`, err);
+                                return;
+                            }
+
+                            // Move each file in the drawable folder
+                            drawableFiles.forEach(drawableFile => {
+                                const sourceFile = path.join(sourceFolder, drawableFile);
+                                console.log(`----- ✅ --- Source FILE TO DRAWABLE ${sourceFile}`);
+
+                                const destinationFile = path.join(destinationFolder, drawableFile);
+
+                                // Move the file to the destination drawable folder
+                                fs.renameSync(sourceFile, destinationFile);
+                                console.log(`----- ✅ --- Moved ${drawableFile} to ${destinationFolder}`);
+                            });
+                        });
+                    }
+                });
             });
 
             // Clean up the unzipped NotificationIcons folder
             rimraf.sync(drawableSourcePath);
-            console.log(' -----  ✅ ---  Cleanup done.');
+            console.log(' -----  ✅ --- Cleanup done.');
 
             deferral.resolve();
         })
         .on('error', function (err) {
-            console.error(' -----  ❌ ---  Error during unzip:', err);
+            console.error(' -----  ❌ --- Error during unzip:', err);
             deferral.reject(err);
         });
 
