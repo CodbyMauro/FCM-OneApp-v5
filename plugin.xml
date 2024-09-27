@@ -26,7 +26,7 @@
         </config-file>
 
         <!-- Add notification_color to strings.xml -->
-        <config-file target="res/values/strings.xml" parent="resources">
+        <config-file target="res/values/strings.xml" parent="/*">
             <string name="notification_color">$NOTIFICATION_COLOR</string>
         </config-file>
     </platform>
