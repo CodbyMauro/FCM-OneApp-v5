@@ -25,9 +25,9 @@
                 android:resource="@color/notification_color" />
         </config-file>
 
-        <!-- Add notification_color to strings.xml -->
-        <config-file target="res/values/strings.xml" parent="/*">
-            <string name="notification_color">$NOTIFICATION_COLOR</string>
+        <!-- Add notification_color to color.xml -->
+        <config-file target="res/values/color.xml" parent="/*">
+            <color name="notification_color">$NOTIFICATION_COLOR</string>
         </config-file>
     </platform>
 
