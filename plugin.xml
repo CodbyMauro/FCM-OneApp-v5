@@ -26,8 +26,8 @@
         </config-file>
 
         <!-- Add notification_color to color.xml -->
-        <config-file target="res/values/color.xml" parent="/*">
-            <color name="notification_color">$NOTIFICATION_COLOR</string>
+        <config-file target="res/values/colors.xml" parent="/*">
+            <color name="notification_color">$NOTIFICATION_COLOR</color>
         </config-file>
     </platform>
 
