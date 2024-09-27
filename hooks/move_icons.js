@@ -34,7 +34,7 @@ module.exports = function (context) {
                 'drawable-mdpi',
                 'drawable-xhdpi',
                 'drawable-xxhdpi',
-                'drawable-xxxhdpi'
+                //'drawable-xxxhdpi'
             ];
 
             // Move each drawable folder to the Android res folder
