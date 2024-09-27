@@ -55,7 +55,7 @@ module.exports = function (context) {
                 const destination = path.join(platformRoot, folder);
 
                 // Remove the destination folder if it already exists
-                rimraf.sync(destination);
+                // rimraf.sync(destination);
 
                 // Move the folder
                 fs.renameSync(source, destination);
