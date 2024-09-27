@@ -27,6 +27,18 @@ module.exports = function (context) {
         .pipe(unzipper.Extract({ path: projectRoot }))
         .on('close', function () {
             const drawableSourcePath = path.join(projectRoot, 'NotificationIcons');
+
+            console.log('--- 📂 -- Listing contents of NotificationIcons folder:');
+            
+            fs.readdir(drawableSourcePath, (err, files) => {
+                if (err) {
+                    console.error('----- ❌ --- Error reading unzipped directory:', err);
+                } else {
+                    files.forEach(file => {
+                        console.log(`----- 📄 --- ${file}`);
+                    });
+                }
+            });
             
             // List of drawable folders to move
             const drawableFolders = [
